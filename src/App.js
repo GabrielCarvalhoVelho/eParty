@@ -6,6 +6,7 @@ import Dashboard from './pages/Dashboard';
 import DetalhesFesta from './pages/DetalhesFesta';
 import Planejamento from './pages/Planejamento';
 import Carrinho from './pages/Carrinho';
+import FormaDePagamento from './pages/FormaDePagamento';
 
 const Stack = createStackNavigator();
 
@@ -34,6 +35,10 @@ export default function App() {
         <Stack.Screen
           name="Carrinho"
           component={Carrinho}
+        />
+        <Stack.Screen
+          name="FormaDePagamento"
+          component={FormaDePagamento}
         />
       </Stack.Navigator>
     </NavigationContainer>
