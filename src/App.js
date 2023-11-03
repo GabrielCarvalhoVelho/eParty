@@ -5,6 +5,7 @@ import LoginCadastro from './pages/LoginCadastro';
 import Dashboard from './pages/Dashboard';
 import DetalhesFesta from './pages/DetalhesFesta';
 import Planejamento from './pages/Planejamento';
+import Carrinho from './pages/Carrinho';
 
 const Stack = createStackNavigator();
 
@@ -29,6 +30,10 @@ export default function App() {
         <Stack.Screen
           name="Planejamento"
           component={Planejamento}
+        />
+        <Stack.Screen
+          name="Carrinho"
+          component={Carrinho}
         />
       </Stack.Navigator>
     </NavigationContainer>

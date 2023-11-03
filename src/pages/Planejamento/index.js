@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Modal, TextInput, Image } from 'react-native';
 import * as SQLite from 'expo-sqlite';
-import Button from '../../components/Button';
+import Button from '../../components/Button'; // Suponhamos que o componente Button esteja definido corretamente
 
 const db = SQLite.openDatabase('produtos.db');
 
@@ -69,7 +69,7 @@ const insertInitialData = () => {
     });
 };
 
-export default function Planejamento() {
+export default function Planejamento({navigation}) {
     const [produtos, setProdutos] = useState([]);
     const [modalVisible, setModalVisible] = useState(false);
     const [quantidade, setQuantidade] = useState('');
@@ -78,13 +78,17 @@ export default function Planejamento() {
     useEffect(() => {
         createTable();
         insertInitialData();
+        fetchProductsFromDB(); // Adicionando a função para buscar produtos
 
+    }, []);
+
+    const fetchProductsFromDB = () => {
         db.transaction(tx => {
             tx.executeSql('SELECT * FROM produtos', [], (_, { rows }) => {
                 setProdutos(rows._array);
             });
         });
-    }, []);
+    };
 
     const handleItemClick = (produto) => {
         setCategoria(produto.categoria);
@@ -113,11 +117,12 @@ export default function Planejamento() {
                                 <ScrollView horizontal showsHorizontalScrollIndicator={false}>
                                     {produtosPorCategoria.map((produto, index) => (
                                         <TouchableOpacity key={index} onPress={() => handleItemClick(produto)}>
-                                            <View key={index} style={styles.card}>
+                                            <View style={styles.card}>
                                                 <Text style={styles.cardTitle}>{produto.nome}</Text>
+                                                {/* Inserção da imagem, ajuste os estilos conforme necessário */}
                                                 <Image
                                                     source={require('../../assets/seu-logo.png')}
-                                                    style={{ width: 100, height: 100 }} // Estilo da imagem
+                                                    style={{ width: 100, height: 100 }}
                                                 />
                                                 <Text style={styles.cardValor}>{produto.valor}</Text>
                                             </View>
@@ -127,7 +132,7 @@ export default function Planejamento() {
                             </View>
                         );
                     }
-                    return null; // Caso a categoria não tenha produtos
+                    return null;
                 })}
                 <View style={styles.paddingAtBottom}></View>
             </ScrollView>
@@ -138,7 +143,7 @@ export default function Planejamento() {
 
             <Modal animationType="slide" transparent={true} visible={modalVisible}>
                 <View style={styles.centeredView}>
-                <View style={styles.modalBg}>
+                    <View style={styles.modalBg}>
                         <View style={styles.modalView}>
                             <Text style={styles.modalText}>
                                 {categoria === 'Locais' ? 'Número de Convidados:' : 'Quantidade:'}
