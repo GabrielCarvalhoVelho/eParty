@@ -18,6 +18,7 @@ import Configuracoes from './pages/Configuracoes';
 import GerenciarNotificacoes from './pages/GerenciarNotificacoes';
 import SobreEstaVersao from './pages/SobreEstaVersao';
 import Ajuda from './pages/Ajuda';
+import EditarFesta from './pages/EditarFesta';
 
 const Stack = createStackNavigator();
 
@@ -94,6 +95,10 @@ export default function App() {
         <Stack.Screen
           name="Ajuda"
           component={Ajuda}
+        />
+        <Stack.Screen
+          name="EditarFesta"
+          component={EditarFesta}
         />
       </Stack.Navigator>
     </NavigationContainer>
