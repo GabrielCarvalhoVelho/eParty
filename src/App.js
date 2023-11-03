@@ -10,6 +10,7 @@ import FormaDePagamento from './pages/FormaDePagamento';
 import FinalizarCompra from './pages/FinalizarCompra';
 import AcompanheSeuPedido from './pages/AcompanheSeuPedido';
 import CriarFesta from './pages/CriarFesta';
+import MeusPedidos from './pages/MeusPedidos';
 
 const Stack = createStackNavigator();
 
@@ -54,6 +55,10 @@ export default function App() {
         <Stack.Screen
           name="CriarFesta"
           component={CriarFesta}
+        />
+        <Stack.Screen
+          name="MeusPedidos"
+          component={MeusPedidos}
         />
       </Stack.Navigator>
     </NavigationContainer>
