@@ -13,6 +13,7 @@ import CriarFesta from './pages/CriarFesta';
 import MeusPedidos from './pages/MeusPedidos';
 import MeusCartoes from './pages/MeusCartoes';
 import AdicionarCartao from './pages/AdicionarCartao';
+import MeuPerfil from './pages/MeuPerfil';
 
 const Stack = createStackNavigator();
 
@@ -69,6 +70,10 @@ export default function App() {
         <Stack.Screen
           name="AdicionarCartao"
           component={AdicionarCartao}
+        />
+        <Stack.Screen
+          name="MeuPerfil"
+          component={MeuPerfil}
         />
       </Stack.Navigator>
     </NavigationContainer>
