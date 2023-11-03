@@ -14,6 +14,7 @@ import MeusPedidos from './pages/MeusPedidos';
 import MeusCartoes from './pages/MeusCartoes';
 import AdicionarCartao from './pages/AdicionarCartao';
 import MeuPerfil from './pages/MeuPerfil';
+import Configuracoes from './pages/Configuracoes';
 
 const Stack = createStackNavigator();
 
@@ -74,6 +75,10 @@ export default function App() {
         <Stack.Screen
           name="MeuPerfil"
           component={MeuPerfil}
+        />
+        <Stack.Screen
+          name="Configuracoes"
+          component={Configuracoes}
         />
       </Stack.Navigator>
     </NavigationContainer>
