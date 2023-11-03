@@ -1,96 +1,31 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Modal, TextInput, Image } from 'react-native';
-import * as SQLite from 'expo-sqlite';
-import Button from '../../components/Button'; // Suponhamos que o componente Button esteja definido corretamente
+import Button from '../../components/Button';
 
-const db = SQLite.openDatabase('produtos.db');
+// Constantes representando os produtos
+const produtos = [
+    { id: 1, nome: 'Local do Fulano', categoria: 'Locais', valor: 'R$100', imagem: require('../../assets/local_do_fulano.jpeg') },
+    { id: 2, nome: 'Local do Ciclano', categoria: 'Locais', valor: 'R$150', imagem: require('../../assets/local_do_ciclano.jpeg')  },
+    { id: 3, nome: 'Local do João', categoria: 'Locais', valor: 'R$120', imagem: require('../../assets/local_do_beltrano.jpeg')  },
+    { id: 4, nome: 'Vinho 900ml', categoria: 'Bebidas', valor: 'R$50', imagem: require('../../assets/vinho.jpeg')   },
+    { id: 5, nome: 'Cerveja c/12', categoria: 'Bebidas', valor: 'R$30', imagem: require('../../assets/cerveja.jpeg')   },
+    { id: 6, nome: 'Conhaque 700ml', categoria: 'Bebidas', valor: 'R$120', imagem: require('../../assets/conhaque.jpeg')   },
+    { id: 7, nome: 'Kit 50 Coxinhas', categoria: 'Salgados', valor: 'R$60', imagem: require('../../assets/coxinha.jpeg')   },
+    { id: 8, nome: 'Kit 50 Kibes', categoria: 'Salgados', valor: 'R$75', imagem: require('../../assets/kibe.jpeg')   },
+    { id: 9, nome: 'Kit 50 Esfihas ', categoria: 'Salgados', valor: 'R$65', imagem: require('../../assets/esfiha.jpeg')   },
+    { id: 10, nome: 'Bolo de Morango', categoria: 'Bolos', valor: 'R$200', imagem: require('../../assets/bolo_de_morango.jpeg')   },
+    { id: 11, nome: 'Bolo de Chocolate', categoria: 'Bolos', valor: 'R$180', imagem: require('../../assets/bolo_de_chocolate.jpeg')   },
+    { id: 12, nome: 'Bolo de Abacaxi', categoria: 'Bolos', valor: 'R$150', imagem: require('../../assets/bolo_de_abacaxi.jpeg')   },
+];
 
-const createTable = () => {
-    db.transaction(tx => {
-        tx.executeSql(
-            'CREATE TABLE IF NOT EXISTS produtos (id INTEGER PRIMARY KEY AUTOINCREMENT, nome TEXT, categoria TEXT, valor TEXT)'
-        );
-    });
-};
-
-const insertInitialData = () => {
-    db.transaction(tx => {
-        tx.executeSql(
-            'INSERT INTO produtos (nome, categoria, valor) SELECT * FROM (SELECT ?, ?, ?) AS temp WHERE NOT EXISTS (SELECT nome FROM produtos WHERE nome = ?)',
-            ['Local 1', 'Locais', 'R$100', 'Local 1']
-        );
-        tx.executeSql(
-            'INSERT INTO produtos (nome, categoria, valor) SELECT * FROM (SELECT ?, ?, ?) AS temp WHERE NOT EXISTS (SELECT nome FROM produtos WHERE nome = ?)',
-            ['Local 2', 'Locais', 'R$150', 'Local 2']
-        );
-        tx.executeSql(
-            'INSERT INTO produtos (nome, categoria, valor) SELECT * FROM (SELECT ?, ?, ?) AS temp WHERE NOT EXISTS (SELECT nome FROM produtos WHERE nome = ?)',
-            ['Local 3', 'Locais', 'R$120', 'Local 3']
-        );
-
-        tx.executeSql(
-            'INSERT INTO produtos (nome, categoria, valor) SELECT * FROM (SELECT ?, ?, ?) AS temp WHERE NOT EXISTS (SELECT nome FROM produtos WHERE nome = ?)',
-            ['Bebida 1', 'Bebidas', 'R$50', 'Bebida 1']
-        );
-        tx.executeSql(
-            'INSERT INTO produtos (nome, categoria, valor) SELECT * FROM (SELECT ?, ?, ?) AS temp WHERE NOT EXISTS (SELECT nome FROM produtos WHERE nome = ?)',
-            ['Bebida 2', 'Bebidas', 'R$60', 'Bebida 2']
-        );
-        tx.executeSql(
-            'INSERT INTO produtos (nome, categoria, valor) SELECT * FROM (SELECT ?, ?, ?) AS temp WHERE NOT EXISTS (SELECT nome FROM produtos WHERE nome = ?)',
-            ['Bebida 3', 'Bebidas', 'R$80', 'Bebida 3']
-        );
-
-        tx.executeSql(
-            'INSERT INTO produtos (nome, categoria, valor) SELECT * FROM (SELECT ?, ?, ?) AS temp WHERE NOT EXISTS (SELECT nome FROM produtos WHERE nome = ?)',
-            ['Salgado 1', 'Salgados', 'R$5', 'Salgado 1']
-        );
-        tx.executeSql(
-            'INSERT INTO produtos (nome, categoria, valor) SELECT * FROM (SELECT ?, ?, ?) AS temp WHERE NOT EXISTS (SELECT nome FROM produtos WHERE nome = ?)',
-            ['Salgado 2', 'Salgados', 'R$4', 'Salgado 2']
-        );
-        tx.executeSql(
-            'INSERT INTO produtos (nome, categoria, valor) SELECT * FROM (SELECT ?, ?, ?) AS temp WHERE NOT EXISTS (SELECT nome FROM produtos WHERE nome = ?)',
-            ['Salgado 3', 'Salgados', 'R$6', 'Salgado 3']
-        );
-
-        tx.executeSql(
-            'INSERT INTO produtos (nome, categoria, valor) SELECT * FROM (SELECT ?, ?, ?) AS temp WHERE NOT EXISTS (SELECT nome FROM produtos WHERE nome = ?)',
-            ['Bolo 1', 'Bolos', 'R$20', 'Bolo 1']
-        );
-        tx.executeSql(
-            'INSERT INTO produtos (nome, categoria, valor) SELECT * FROM (SELECT ?, ?, ?) AS temp WHERE NOT EXISTS (SELECT nome FROM produtos WHERE nome = ?)',
-            ['Bolo 2', 'Bolos', 'R$25', 'Bolo 2']
-        );
-        tx.executeSql(
-            'INSERT INTO produtos (nome, categoria, valor) SELECT * FROM (SELECT ?, ?, ?) AS temp WHERE NOT EXISTS (SELECT nome FROM produtos WHERE nome = ?)',
-            ['Bolo 3', 'Bolos', 'R$22', 'Bolo 3']
-        );
-    });
-};
-
-export default function Planejamento({navigation}) {
-    const [produtos, setProdutos] = useState([]);
+export default function Planejamento({ navigation }) {
     const [modalVisible, setModalVisible] = useState(false);
     const [quantidade, setQuantidade] = useState('');
     const [categoria, setCategoria] = useState('');
-
-    useEffect(() => {
-        createTable();
-        insertInitialData();
-        fetchProductsFromDB(); // Adicionando a função para buscar produtos
-
-    }, []);
-
-    const fetchProductsFromDB = () => {
-        db.transaction(tx => {
-            tx.executeSql('SELECT * FROM produtos', [], (_, { rows }) => {
-                setProdutos(rows._array);
-            });
-        });
-    };
+    const [produtoSelecionado, setProdutoSelecionado] = useState({});
 
     const handleItemClick = (produto) => {
+        setProdutoSelecionado(produto);
         setCategoria(produto.categoria);
         setModalVisible(true);
     };
@@ -98,31 +33,38 @@ export default function Planejamento({navigation}) {
     const closeModal = () => {
         setModalVisible(false);
         setQuantidade('');
+        setProdutoSelecionado(null);
     };
 
-    const categoriasUnicas = [...new Set(produtos.map(produto => produto.categoria))];
+    const adicionarProdutoAoCarrinho = () => {
+        if (produtoSelecionado && quantidade > 0) {
+          const produtoComQuantidade = { ...produtoSelecionado, quantidade: Number(quantidade) };
+          setProdutoSelecionado(produtoComQuantidade);
+          closeModal();
+        }
+      };
+
+    const categoriasUnicas = [...new Set(produtos.map((produto) => produto.categoria))];
 
     return (
         <View style={styles.container}>
             <ScrollView style={styles.scrollView}>
-                <TextInput style={styles.searchBar} placeholder="Pesquisar" />
-
-                {categoriasUnicas.map(categoria => {
-                    const produtosPorCategoria = produtos.filter(produto => produto.categoria === categoria);
-
+                {/* Lógica de renderização dos produtos */}
+                {categoriasUnicas.map((categoria) => {
+                    const produtosPorCategoria = produtos.filter((produto) => produto.categoria === categoria);
                     if (produtosPorCategoria.length > 0) {
                         return (
                             <View key={categoria} style={styles.categoryContainer}>
                                 <Text style={styles.title}>{categoria}</Text>
                                 <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-                                    {produtosPorCategoria.map((produto, index) => (
-                                        <TouchableOpacity key={index} onPress={() => handleItemClick(produto)}>
+                                    {produtosPorCategoria.map((produto) => (
+                                        <TouchableOpacity key={produto.id} onPress={() => handleItemClick(produto)}>
                                             <View style={styles.card}>
                                                 <Text style={styles.cardTitle}>{produto.nome}</Text>
-                                                {/* Inserção da imagem, ajuste os estilos conforme necessário */}
+                                                {/* Imagem: ajuste de acordo com o layout */}
                                                 <Image
-                                                    source={require('../../assets/seu-logo.png')}
-                                                    style={{ width: 100, height: 100 }}
+                                                    source={produto.imagem}
+                                                    style={{ width: 100, height: 100 , borderRadius: 10}}
                                                 />
                                                 <Text style={styles.cardValor}>{produto.valor}</Text>
                                             </View>
@@ -135,11 +77,19 @@ export default function Planejamento({navigation}) {
                     return null;
                 })}
                 <View style={styles.paddingAtBottom}></View>
+                {/* Botão para ir para o carrinho */}
+                <View style={styles.buttonContainer}>
+                <Button
+                    text="Ir para o Carrinho"
+                    backgroundColor="green"
+                    onPress={() => {
+                        navigation.navigate('Carrinho', { produtos: produtoSelecionado });
+                    }}
+                />
+                </View>
             </ScrollView>
 
-            <View style={styles.buttonContainer}>
-                <Button text={`Ir para o carrinho`} backgroundColor="green" onPress={() => navigation.navigate('Carrinho')} />
-            </View>
+            
 
             <Modal animationType="slide" transparent={true} visible={modalVisible}>
                 <View style={styles.centeredView}>
@@ -148,15 +98,15 @@ export default function Planejamento({navigation}) {
                             <Text style={styles.modalText}>
                                 {categoria === 'Locais' ? 'Número de Convidados:' : 'Quantidade:'}
                             </Text>
-                            <TextInput 
+                            <TextInput
                                 style={styles.input}
-                                onChangeText={text => setQuantidade(text)}
+                                onChangeText={(text) => setQuantidade(text)}
                                 value={quantidade}
                             />
-                            <TouchableOpacity onPress={closeModal} style={styles.modalButton}>
+                            <TouchableOpacity onPress={adicionarProdutoAoCarrinho} style={styles.modalButton}>
                                 <Text style={styles.buttonText}>Salvar</Text>
                             </TouchableOpacity>
-                            <TouchableOpacity onPress={() => setModalVisible(false)} style={styles.closeButton}>
+                            <TouchableOpacity onPress={closeModal} style={styles.closeButton}>
                                 <Text style={styles.buttonText}>Fechar</Text>
                             </TouchableOpacity>
                         </View>
@@ -267,7 +217,7 @@ const styles = StyleSheet.create({
         marginBottom: 5,
     },
     cardValor: {
-        fontSize: 14,
+        fontSize: 16,
         textAlign: 'center',
         color: 'green', // Ou outra cor de acordo com o design
     },
