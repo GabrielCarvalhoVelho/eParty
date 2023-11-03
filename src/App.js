@@ -11,6 +11,7 @@ import FinalizarCompra from './pages/FinalizarCompra';
 import AcompanheSeuPedido from './pages/AcompanheSeuPedido';
 import CriarFesta from './pages/CriarFesta';
 import MeusPedidos from './pages/MeusPedidos';
+import MeusCartoes from './pages/MeusCartoes';
 
 const Stack = createStackNavigator();
 
@@ -59,6 +60,10 @@ export default function App() {
         <Stack.Screen
           name="MeusPedidos"
           component={MeusPedidos}
+        />
+        <Stack.Screen
+          name="MeusCartoes"
+          component={MeusCartoes}
         />
       </Stack.Navigator>
     </NavigationContainer>
