@@ -8,6 +8,7 @@ import Planejamento from './pages/Planejamento';
 import Carrinho from './pages/Carrinho';
 import FormaDePagamento from './pages/FormaDePagamento';
 import FinalizarCompra from './pages/FinalizarCompra';
+import AcompanheSeuPedido from './pages/AcompanheSeuPedido';
 
 const Stack = createStackNavigator();
 
@@ -44,6 +45,10 @@ export default function App() {
         <Stack.Screen
           name="FinalizarCompra"
           component={FinalizarCompra}
+        />
+        <Stack.Screen
+          name="AcompanheSeuPedido"
+          component={AcompanheSeuPedido}
         />
       </Stack.Navigator>
     </NavigationContainer>

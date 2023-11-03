@@ -5,21 +5,14 @@ import Button from '../../components/Button';
 import ProdutosFinalizarCompra from '../../components/ProdutosFinalizarCompra';
 import { useEffect, useState } from 'react';
 
-export default function FinalizarCompra({navigation}) {
+export default function FinalizarCompra({ navigation }) {
     // Defina o título no Header
-  useEffect(() => {
-    navigation.setOptions({
-      title: 'Finalizar compra',
-    });
-  }, []);
-  const [codigoPedido, setCodigoPedido] = useState('');
-
-  useEffect(() => {
-      // Gera um número aleatório de 5 dígitos para representar o código do pedido
-      const randomCode = Math.floor(10000 + Math.random() * 90000);
-      setCodigoPedido(randomCode);
-  }, []);
-    const productName = "Nome do Produto: xxxxxxx";
+    useEffect(() => {
+        navigation.setOptions({
+            title: 'Finalizar compra',
+        });
+    }, []);
+    const codigoPedido = 18654
 
     return (
         <View style={styles.container}>
@@ -27,10 +20,12 @@ export default function FinalizarCompra({navigation}) {
                 <Icon name="check" size={30} color="green" />
                 <View style={styles.textContainer}>
                     <Text style={styles.title}>Compra Finalizada</Text>
-                    <Text style={styles.codigoPedido}>Código do Pedido: {codigoPedido}</Text>
+                    <Text style={styles.codigoPedido}>Código do Pedido: <Text style={{fontWeight: 'bold'}}>{codigoPedido}</Text></Text>
                 </View>
             </View>
-            <ProdutosFinalizarCompra />
+            <View style={{ marginBottom: 20 }}>
+                <ProdutosFinalizarCompra />
+            </View>
             <View style={styles.receberBox}>
                 <Icon name="map-marker" size={30} color="black" style={{ marginRight: 10 }} />
                 <View style={styles.receberTextContainer}>
@@ -53,7 +48,7 @@ export default function FinalizarCompra({navigation}) {
                     text="Acompanhe seu pedido"
                     backgroundColor="purple"
                     onPress={() =>
-                        navigation.navigate('AcompanhePedido')
+                        navigation.navigate('AcompanheSeuPedido')
                     }
                 />
             </View>
@@ -155,7 +150,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         borderRadius: 5,
         padding: 10,
-        marginBottom: 220,
+        marginBottom: 200,
         marginRight: 20
     },
     produtosTitle: {

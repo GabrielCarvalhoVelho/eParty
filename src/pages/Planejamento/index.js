@@ -229,10 +229,10 @@ const styles = StyleSheet.create({
     buttonContainer: {
         position: 'absolute',
         bottom: 0,
-        width: '80%',
+        width: '95%',
         alignItems: 'center',
         paddingBottom: 10,
-        marginLeft: 40
+        marginLeft: 0
     },
     paddingAtBottom: {
         height: 80, // Altura correspondente ao botão
