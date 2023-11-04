@@ -10,7 +10,7 @@ export default function Carrinho({ route, navigation }) {
     const [items, setItems] = useState([
         { id: 1, name: 'Salão do Fulano', price: 100.00, quantity: 1, imagem: require('../../assets/local_do_fulano.jpeg') },
         { id: 2, name: 'Cerveja c/ 12', price: 30.00, quantity: 5, imagem: require('../../assets/cerveja.jpeg') },
-        { id: 3, name: 'Conhaque 700ml', price: 120.00, quantity: 5, imagem: require('../../assets/conhaque.jpeg') },
+        { id: 3, name: 'Conhaque 700ml', price: 120.00, quantity: 3, imagem: require('../../assets/conhaque.jpeg') },
         { id: 4, name: 'Kit 50 coxinhas', price: 60.00, quantity: 2, imagem: require('../../assets/coxinha.jpeg') },
         { id: 5, name: 'Bolo de Morango', price: 200.00, quantity: 1, imagem: require('../../assets/bolo_de_morango.jpeg') },
     ]);

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import Button from '../../components/Button'
 import * as SQLite from 'expo-sqlite';
 
 const db = SQLite.openDatabase('usuarios.db');
@@ -91,18 +92,20 @@ export default function LoginCadastro() {
                         onChangeText={text => setPassword(text)}
                     />
 
-                    <TouchableOpacity
-                        style={[styles.button, styles.loginButton]}
-                        onPress={handleLogin}
-                    >
-                        <Text style={styles.buttonText}>Login</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        style={[styles.button, styles.cadastroButton]}
-                        onPress={handleRegister}
-                    >
-                        <Text style={styles.buttonText}>Cadastro</Text>
-                    </TouchableOpacity>
+                    <View style={styles.buttonContainer}>
+                        <Button
+                            text="Login"
+                            backgroundColor="green"
+                            onPress={handleLogin}
+                        />
+                    </View>
+                    <View style={styles.buttonContainer}>
+                        <Button
+                            text="Cadastrar"
+                            backgroundColor="purple"
+                            onPress={handleRegister}
+                        />
+                    </View>
                 </View>
             </View>
         </View>
