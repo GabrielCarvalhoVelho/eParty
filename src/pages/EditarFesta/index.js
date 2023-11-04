@@ -29,6 +29,7 @@ export default function EditarFesta({ route, navigation }) {
         (_, { rowsAffected }) => {
           if (rowsAffected > 0) {
             console.log('Festa editada no banco de dados:', nome, endereco, data, horario, status);
+            // Atualiza a página DetalhesFesta com os novos dados
             navigation.navigate('DetalhesFesta', {
               festa: {
                 ...festaParaEditar,
