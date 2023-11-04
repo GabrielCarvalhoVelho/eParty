@@ -4,18 +4,18 @@ import Button from '../../components/Button';
 
 // Constantes representando os produtos
 const produtos = [
-    { id: 1, nome: 'Local do Fulano', categoria: 'Locais', valor: 'R$100', imagem: require('../../assets/local_do_fulano.jpeg') },
-    { id: 2, nome: 'Local do Ciclano', categoria: 'Locais', valor: 'R$150', imagem: require('../../assets/local_do_ciclano.jpeg')  },
-    { id: 3, nome: 'Local do João', categoria: 'Locais', valor: 'R$120', imagem: require('../../assets/local_do_beltrano.jpeg')  },
-    { id: 4, nome: 'Vinho 900ml', categoria: 'Bebidas', valor: 'R$50', imagem: require('../../assets/vinho.jpeg')   },
-    { id: 5, nome: 'Cerveja c/12', categoria: 'Bebidas', valor: 'R$30', imagem: require('../../assets/cerveja.jpeg')   },
-    { id: 6, nome: 'Conhaque 700ml', categoria: 'Bebidas', valor: 'R$120', imagem: require('../../assets/conhaque.jpeg')   },
-    { id: 7, nome: 'Kit 50 Coxinhas', categoria: 'Salgados', valor: 'R$60', imagem: require('../../assets/coxinha.jpeg')   },
-    { id: 8, nome: 'Kit 50 Kibes', categoria: 'Salgados', valor: 'R$75', imagem: require('../../assets/kibe.jpeg')   },
-    { id: 9, nome: 'Kit 50 Esfihas ', categoria: 'Salgados', valor: 'R$65', imagem: require('../../assets/esfiha.jpeg')   },
-    { id: 10, nome: 'Bolo de Morango', categoria: 'Bolos', valor: 'R$200', imagem: require('../../assets/bolo_de_morango.jpeg')   },
-    { id: 11, nome: 'Bolo de Chocolate', categoria: 'Bolos', valor: 'R$180', imagem: require('../../assets/bolo_de_chocolate.jpeg')   },
-    { id: 12, nome: 'Bolo de Abacaxi', categoria: 'Bolos', valor: 'R$150', imagem: require('../../assets/bolo_de_abacaxi.jpeg')   },
+    { id: 1, nome: 'Local do Fulano', categoria: 'Locais', valor: 'R$100', imagem: require('../../assets/local_do_fulano.jpeg')},
+    { id: 2, nome: 'Local do Ciclano', categoria: 'Locais', valor: 'R$150', imagem: require('../../assets/local_do_ciclano.jpeg')},
+    { id: 3, nome: 'Local do João', categoria: 'Locais', valor: 'R$120', imagem: require('../../assets/local_do_beltrano.jpeg')},
+    { id: 4, nome: 'Vinho 900ml', categoria: 'Bebidas', valor: 'R$50', imagem: require('../../assets/vinho.jpeg')},
+    { id: 5, nome: 'Cerveja c/12', categoria: 'Bebidas', valor: 'R$30', imagem: require('../../assets/cerveja.jpeg')},
+    { id: 6, nome: 'Conhaque 700ml', categoria: 'Bebidas', valor: 'R$120', imagem: require('../../assets/conhaque.jpeg')},
+    { id: 7, nome: 'Kit 50 Coxinhas', categoria: 'Salgados', valor: 'R$60', imagem: require('../../assets/coxinha.jpeg')},
+    { id: 8, nome: 'Kit 50 Kibes', categoria: 'Salgados', valor: 'R$75', imagem: require('../../assets/kibe.jpeg')},
+    { id: 9, nome: 'Kit 50 Esfihas ', categoria: 'Salgados', valor: 'R$65', imagem: require('../../assets/esfiha.jpeg')},
+    { id: 10, nome: 'Bolo de Morango', categoria: 'Bolos', valor: 'R$200', imagem: require('../../assets/bolo_de_morango.jpeg')},
+    { id: 11, nome: 'Bolo de Chocolate', categoria: 'Bolos', valor: 'R$180', imagem: require('../../assets/bolo_de_chocolate.jpeg')},
+    { id: 12, nome: 'Bolo de Abacaxi', categoria: 'Bolos', valor: 'R$150', imagem: require('../../assets/bolo_de_abacaxi.jpeg')},
 ];
 
 export default function Planejamento({ navigation }) {
@@ -49,6 +49,7 @@ export default function Planejamento({ navigation }) {
     return (
         <View style={styles.container}>
             <ScrollView style={styles.scrollView}>
+            <TextInput style={styles.searchBar} placeholder="Pesquisar" />
                 {/* Lógica de renderização dos produtos */}
                 {categoriasUnicas.map((categoria) => {
                     const produtosPorCategoria = produtos.filter((produto) => produto.categoria === categoria);

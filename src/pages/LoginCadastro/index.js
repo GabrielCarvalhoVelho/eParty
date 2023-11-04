@@ -28,7 +28,7 @@ export default function LoginCadastro() {
                     if (rows.length > 0) {
                         navigation.navigate('Dashboard')
                     } else {
-                        showMessage('Erro no login, verifique e tente novamente.', 'red');
+                        showMessage('Erro ao acessar, verifique e tente novamente.', 'red');
                     }
                 }
             );
@@ -94,14 +94,14 @@ export default function LoginCadastro() {
 
                     <View style={styles.buttonContainer}>
                         <Button
-                            text="Login"
+                            text="Acessar conta"
                             backgroundColor="green"
                             onPress={handleLogin}
                         />
                     </View>
                     <View style={styles.buttonContainer}>
                         <Button
-                            text="Cadastrar"
+                            text="Criar nova conta"
                             backgroundColor="purple"
                             onPress={handleRegister}
                         />

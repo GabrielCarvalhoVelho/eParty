@@ -68,11 +68,12 @@ export default function FormaDePagamento({ navigation }) {
                 title="Adicionar cartão"
                 backgroundColor="purple"
                 onPress={() => {
-                    // Lógica para finalizar a compra
+                    navigation.navigate('AdicionarCartao')
                 }}
             />
           </View>
         )}
+        <View style={{marginBottom: 20}}>
         <CardFormaDePagamento id="pix" icon="money" label="Pix" 
         onPress={() => setMostrarOpcoesPix(!mostrarOpcoesPix)} />
         {/* Renderize as opções de dinheiro condicionalmente */}
@@ -84,6 +85,8 @@ export default function FormaDePagamento({ navigation }) {
             />
           </View>
         )}
+        </View>
+        
         <Button
           text="Finalizar Compra"
           title="Finalizar Compra"
