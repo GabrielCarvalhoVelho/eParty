@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image } from 'react-native';
+import { View, Text, TextInput, StyleSheet, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import Button from '../../components/Button'
 import * as SQLite from 'expo-sqlite';
@@ -154,10 +154,11 @@ const styles = StyleSheet.create({
     input: {
         height: 40,
         borderBottomWidth: 1, // Atribui uma borda apenas na parte inferior
-        borderColor: 'gray', // Cor da borda inferior
+        borderColor: 'purple', // Cor da borda inferior
         marginVertical: 10,
         paddingLeft: 10,
-        fontSize: 16
+        fontSize: 16,
+        color: 'purple',
     },
     button: {
         padding: 10,
