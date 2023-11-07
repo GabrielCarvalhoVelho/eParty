@@ -32,14 +32,14 @@ export default function AcompanheSeuPedido({ navigation }) {
         {/* Card com previsão de entrega, status e forma de pagamento */}
         <Card title="Previsão de Entrega">
           <Text>25/12, 10:30 - 11:30</Text>
-          <Text>Status do Pedido: Aceito</Text>
+          <Text>Status do Pedido: Pendente</Text>
           <Text>Forma de Pagamento: Mastercard na Entrega</Text>
         </Card>
 
         {/* Card com endereço de entrega */}
         <Card title="Endereço de Entrega">
-          <Text>Rua da Consolação, 689</Text>
-          <Text>Bairro: Consolação</Text>
+          <Text>Rua do fulano, 123</Text>
+          <Text>Bairro: Fulano</Text>
           <Text>Cidade: São Paulo</Text>
         </Card>
 

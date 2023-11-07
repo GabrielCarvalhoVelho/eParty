@@ -30,8 +30,8 @@ export default function FinalizarCompra({ navigation }) {
                 <Icon name="map-marker" size={30} color="black" style={{ marginRight: 10 }} />
                 <View style={styles.receberTextContainer}>
                     <Text style={styles.receberTitle}>Receber em:</Text>
-                    <Text style={styles.receberText}>Rua Augusta, 679</Text>
-                    <Text style={styles.receberText}>Consolação, São Paulo, SP</Text>
+                    <Text style={styles.receberText}>Rua do fulano, 123</Text>
+                    <Text style={styles.receberText}>Fulano, São Paulo, SP</Text>
                 </View>
             </View>
             <View style={styles.produtosBox}>
